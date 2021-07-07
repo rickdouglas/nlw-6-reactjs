@@ -1,16 +1,17 @@
-import { useState } from "react";
+import {ButtonHTMLAttributes} from 'react'
+import '../styles/button.scss';
 
-export function Button(){
-  const [counter, setCounter] = useState(0);
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> 
+/**Button Props
+ * Como o botao é um componente generico e que vai ser usado mais de uma vez na app
+ * Cria-se um componente Button passando para ele todas as propriedades que um componente
+ * <button> html pode receber.
+ */
   
-  function increment(){
-    setCounter(counter + 1);
-    console.log(counter);
-  }
+export function Button(props : ButtonProps){
 
   return (
-    <button onClick={increment}>
-      {counter}
-    </button> // seta um valor default quando o valor nao for passado
+    <button className='button' {...props} /> // operador spread que atribui todas as propriedades recebidas como parametro para o componente
+
   )
 }

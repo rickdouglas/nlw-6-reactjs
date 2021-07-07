@@ -1,12 +1,14 @@
 import React from 'react';
-import {Button} from './components/Button'
+import {BrowserRouter, Route} from 'react-router-dom';
+import {Home} from './pages/Home';
+import {NewRoom} from './pages/NewRoom';
 
 function App() {
   return (
-    <div>
-      <p>Testando renderizaçao de components</p>
-      <Button />
-    </div> // no ultimo elemento é setado o valor default por nao contem nenhum valor passado na propriedade
+    <BrowserRouter>
+      <Route path='/' exact component={Home} />
+      <Route path='/rooms/new' component={NewRoom} />
+    </BrowserRouter>
   );
 }
 
