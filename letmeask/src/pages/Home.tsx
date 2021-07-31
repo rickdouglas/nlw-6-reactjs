@@ -4,16 +4,17 @@ import logoImg from "../assets/images/logo.svg";
 import googleImg from "../assets/images/google-icon.svg";
 import '../styles/auth.scss'
 import { Button } from "../components/Button";
-import {firebase, auth, database} from '../services/firebase';
+import {useAuth} from '../hooks/useAuth';
 
 export function Home (){
   const history = useHistory();
+  const {user,signInWithGoogle} = useAuth()
+ 
   
-  function handleCreateRoom(){
-    const provider = new firebase.auth.GoogleAuthProvider(); // faz a autenticação com a conta google
-    auth.signInWithPopup(provider).then((result) => { // abre o pop-up da tela de autenticação
-      console.log(result);
-    });
+  async function handleCreateRoom(){
+    if(!user) { // se o usuario nao estiver logado chama o metodo de autenticação
+      await signInWithGoogle();
+    }
     history.push('/rooms/new');
   }
   
